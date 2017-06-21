@@ -1,0 +1,176 @@
+ SET SYSMENU TO
+ SET SYSMENU AUTOMATIC
+ DEFINE PAD _2r7033rle OF _MSYSMENU PROMPT "Compras" KEY ALT+C, "" COLOR SCHEME 3
+ DEFINE PAD _2r7033rlf OF _MSYSMENU PROMPT "N/C y N/D" KEY ALT+N, "" COLOR SCHEME 3
+ DEFINE PAD _2r7033rlg OF _MSYSMENU PROMPT "Reportes" KEY ALT+R, "" COLOR SCHEME 3
+ DEFINE PAD _2r7033rlh OF _MSYSMENU PROMPT "Documentos" KEY ALT+D, "" COLOR SCHEME 3
+ DEFINE PAD _2r7033rli OF _MSYSMENU PROMPT "Salir" KEY ALT+S, "" COLOR SCHEME 3
+ ON PAD _2r7033rle OF _MSYSMENU ACTIVATE POPUP compras
+ ON PAD _2r7033rlf OF _MSYSMENU ACTIVATE POPUP _1u30wnxsd
+ ON PAD _2r7033rlg OF _MSYSMENU ACTIVATE POPUP reportes
+ ON PAD _2r7033rlh OF _MSYSMENU ACTIVATE POPUP nuevoeleme
+ ON PAD _2r7033rli OF _MSYSMENU ACTIVATE POPUP salir
+ DEFINE POPUP compras SHADOW MARGIN RELATIVE COLOR SCHEME 4
+ DEFINE BAR 1 OF compras PROMPT "Articulos - Items"
+ DEFINE BAR 2 OF compras PROMPT "Activos Fijos"
+ DEFINE BAR 3 OF compras PROMPT "Varios (Detalle de Items)"
+ DEFINE BAR 4 OF compras PROMPT "Gastos (No deducibles)"
+ DEFINE BAR 5 OF compras PROMPT "Gastos (Deducibles)"
+ DEFINE BAR 6 OF compras PROMPT "Con T/C - Viaticos"
+ DEFINE BAR 7 OF compras PROMPT "Articulos - Items Segun Doc. Inic"
+ DEFINE BAR 8 OF compras PROMPT "\-"
+ DEFINE BAR 9 OF compras PROMPT "Importaciones"
+ DEFINE BAR 10 OF compras PROMPT "\-"
+ DEFINE BAR 11 OF compras PROMPT "Adquicion de Mercaderia (Incluye Gastos)"
+ DEFINE BAR 12 OF compras PROMPT "\-"
+ DEFINE BAR 13 OF compras PROMPT "Proveedores"
+ DEFINE BAR 14 OF compras PROMPT "Anticipo a Proveedores"
+ DEFINE BAR 15 OF compras PROMPT "Servicios"
+ DEFINE BAR 16 OF compras PROMPT "\-"
+ DEFINE BAR 17 OF compras PROMPT "Liquidaciones"
+ ON SELECTION BAR 1 OF compras DO FORM adq0101
+ ON BAR 2 OF compras ACTIVATE POPUP activosfij
+ ON SELECTION BAR 3 OF compras DO FORM adq0104
+ ON SELECTION BAR 4 OF compras DO FORM adq0103
+ ON SELECTION BAR 5 OF compras DO FORM adq0105
+ ON SELECTION BAR 6 OF compras DO FORM adq0111
+ ON SELECTION BAR 7 OF compras DO FORM adq0106
+ ON BAR 9 OF compras ACTIVATE POPUP _1xb0kqjg3
+ ON BAR 11 OF compras ACTIVATE POPUP adquiciond
+ ON SELECTION BAR 13 OF compras DO FORM adm0303
+ ON SELECTION BAR 14 OF compras DO FORM adq0107
+ ON SELECTION BAR 15 OF compras DO FORM adq0109
+ ON SELECTION BAR 17 OF compras DO FORM fac0112
+ DEFINE POPUP activosfij SHADOW MARGIN RELATIVE COLOR SCHEME 4
+ DEFINE BAR 1 OF activosfij PROMPT "Normal"
+ DEFINE BAR 2 OF activosfij PROMPT "Con Tarjeta/Cred"
+ ON SELECTION BAR 1 OF activosfij DO FORM adq0102
+ ON SELECTION BAR 2 OF activosfij DO FORM adq0102c
+ DEFINE POPUP _1xb0kqjg3 SHADOW MARGIN RELATIVE COLOR SCHEME 4
+ DEFINE BAR 1 OF _1xb0kqjg3 PROMPT "Adquisición Import."
+ DEFINE BAR 2 OF _1xb0kqjg3 PROMPT "Anticipos - Gastos"
+ DEFINE BAR 3 OF _1xb0kqjg3 PROMPT "Liquidacion de Aduana"
+ DEFINE BAR 4 OF _1xb0kqjg3 PROMPT "Calculo de Costos"
+ DEFINE BAR 5 OF _1xb0kqjg3 PROMPT "\-"
+ DEFINE BAR 6 OF _1xb0kqjg3 PROMPT "Calculo de Costos Informal"
+ ON SELECTION BAR 1 OF _1xb0kqjg3 DO FORM adq0108a
+ ON SELECTION BAR 2 OF _1xb0kqjg3 DO FORM adq0108b
+ ON SELECTION BAR 3 OF _1xb0kqjg3 DO FORM adq0108d
+ ON SELECTION BAR 4 OF _1xb0kqjg3 DO FORM adq0108c
+ ON SELECTION BAR 6 OF _1xb0kqjg3 DO FORM adq0108f
+ DEFINE POPUP adquiciond SHADOW MARGIN RELATIVE COLOR SCHEME 4
+ DEFINE BAR 1 OF adquiciond PROMPT "Anticipos - Gastos"
+ DEFINE BAR 2 OF adquiciond PROMPT "Calculo de Costos"
+ DEFINE BAR 3 OF adquiciond PROMPT "Factura-Ingreso de Mercaderia"
+ ON SELECTION BAR 1 OF adquiciond DO FORM adq0110b
+ ON SELECTION BAR 2 OF adquiciond DO FORM adq0110c
+ ON SELECTION BAR 3 OF adquiciond DO FORM adq0110a
+ DEFINE POPUP _1u30wnxsd SHADOW MARGIN RELATIVE COLOR SCHEME 4
+ DEFINE BAR 1 OF _1u30wnxsd PROMPT "Notas de Credito o Debito (Proveedor Detalle)"
+ DEFINE BAR 2 OF _1u30wnxsd PROMPT "Notas de Credito o Debito (Proveedor)"
+ DEFINE BAR 3 OF _1u30wnxsd PROMPT "\-"
+ DEFINE BAR 4 OF _1u30wnxsd PROMPT "Notas de Credito o Debito Proveedor Detalle (Devolucion SR)"
+ DEFINE BAR 5 OF _1u30wnxsd PROMPT "Notas de Credito o Debito Proveedor (Sin Referencia)"
+ ON SELECTION BAR 1 OF _1u30wnxsd DO FORM adq0301
+ ON SELECTION BAR 2 OF _1u30wnxsd DO FORM adq0302
+ ON SELECTION BAR 4 OF _1u30wnxsd DO FORM adq0301a
+ ON SELECTION BAR 5 OF _1u30wnxsd DO FORM adq0302a
+ DEFINE POPUP reportes SHADOW MARGIN RELATIVE COLOR SCHEME 4
+ DEFINE BAR 1 OF reportes PROMPT "Movimiento historico"
+ DEFINE BAR 2 OF reportes PROMPT "Documento por Proveedor"
+ DEFINE BAR 3 OF reportes PROMPT "Por tipo de Documento"
+ DEFINE BAR 4 OF reportes PROMPT "Estado de Cta Proveedor"
+ DEFINE BAR 5 OF reportes PROMPT "Montos Totales"
+ DEFINE BAR 6 OF reportes PROMPT "Montos Totales (Grupos Doc)"
+ DEFINE BAR 7 OF reportes PROMPT "Secuencial de Documentos"
+ DEFINE BAR 8 OF reportes PROMPT "Por Peso"
+ DEFINE BAR 9 OF reportes PROMPT "\-"
+ DEFINE BAR 10 OF reportes PROMPT "Importaciones"
+ DEFINE BAR 11 OF reportes PROMPT "Adquisiciones Con Gastos"
+ DEFINE BAR 12 OF reportes PROMPT "\-"
+ DEFINE BAR 13 OF reportes PROMPT "Caja Chica"
+ DEFINE BAR 14 OF reportes PROMPT "\-"
+ DEFINE BAR 15 OF reportes PROMPT "Configuración de Reporte"
+ ON SELECTION BAR 1 OF reportes DO FORM inv0601c
+ ON SELECTION BAR 2 OF reportes DO FORM fac0301
+ ON SELECTION BAR 3 OF reportes DO FORM fac0305
+ ON SELECTION BAR 4 OF reportes DO FORM adq0201
+ ON SELECTION BAR 5 OF reportes DO FORM fac0303
+ ON SELECTION BAR 6 OF reportes DO FORM fac0303a
+ ON SELECTION BAR 7 OF reportes DO FORM fac0307
+ ON SELECTION BAR 8 OF reportes DO FORM adq0203
+ ON BAR 10 OF reportes ACTIVATE POPUP _211109wmu
+ ON BAR 11 OF reportes ACTIVATE POPUP adquisicio
+ ON SELECTION BAR 13 OF reportes DO FORM adq0304
+ ON SELECTION BAR 15 OF reportes DO FORM fac0308
+ DEFINE POPUP _211109wmu SHADOW MARGIN RELATIVE COLOR SCHEME 4
+ DEFINE BAR 1 OF _211109wmu PROMPT "No Incluidos en Calculos"
+ DEFINE BAR 2 OF _211109wmu PROMPT "Calculos"
+ DEFINE BAR 3 OF _211109wmu PROMPT "\-"
+ DEFINE BAR 4 OF _211109wmu PROMPT "Lista de Empaque"
+ DEFINE BAR 5 OF _211109wmu PROMPT "Items Facturados en Importación"
+ DEFINE BAR 6 OF _211109wmu PROMPT "Items Rotos y Notas de Credito"
+ DEFINE BAR 7 OF _211109wmu PROMPT "Detalle de Facturacion"
+ DEFINE BAR 8 OF _211109wmu PROMPT "Detalle de Bajas"
+ DEFINE BAR 9 OF _211109wmu PROMPT "Detalle de Facturacion Valorado"
+ ON SELECTION BAR 1 OF _211109wmu DO FORM adq0307
+ ON SELECTION BAR 2 OF _211109wmu DO FORM adq0308
+ ON SELECTION BAR 4 OF _211109wmu DO FORM adq0309
+ ON SELECTION BAR 5 OF _211109wmu DO FORM adq0310
+ ON SELECTION BAR 6 OF _211109wmu DO FORM adq0311
+ ON SELECTION BAR 7 OF _211109wmu DO FORM adq0312
+ ON SELECTION BAR 8 OF _211109wmu DO FORM adq0313
+ ON SELECTION BAR 9 OF _211109wmu DO FORM adq0314
+ DEFINE POPUP adquisicio SHADOW MARGIN RELATIVE COLOR SCHEME 4
+ DEFINE BAR 1 OF adquisicio PROMPT "Documentos incluidos en Calculos"
+ DEFINE BAR 2 OF adquisicio PROMPT "Calculos"
+ ON SELECTION BAR 1 OF adquisicio DO FORM adq0305
+ ON SELECTION BAR 2 OF adquisicio DO FORM adq0306
+ DEFINE POPUP nuevoeleme SHADOW MARGIN RELATIVE COLOR SCHEME 4
+ DEFINE BAR 1 OF nuevoeleme PROMPT "Formas de Pago/Cobro"
+ DEFINE BAR 2 OF nuevoeleme PROMPT "Cancelación Saldos Iniciales"
+ DEFINE BAR 3 OF nuevoeleme PROMPT "Documento bancario"
+ DEFINE BAR 4 OF nuevoeleme PROMPT "Contabilización"
+ DEFINE BAR 5 OF nuevoeleme PROMPT "\-"
+ DEFINE BAR 6 OF nuevoeleme PROMPT "Autorización"
+ DEFINE BAR 7 OF nuevoeleme PROMPT "Anulación"
+ DEFINE BAR 8 OF nuevoeleme PROMPT "Consulta"
+ DEFINE BAR 9 OF nuevoeleme PROMPT "Correccion"
+ ON SELECTION BAR 1 OF nuevoeleme DO FORM adq0701b
+ ON SELECTION BAR 2 OF nuevoeleme DO FORM saldoini
+ ON SELECTION BAR 3 OF nuevoeleme DO FORM adq0702b
+ ON SELECTION BAR 4 OF nuevoeleme DO FORM adq0703b
+ ON SELECTION BAR 6 OF nuevoeleme DO FORM adq0707
+ ON SELECTION BAR 7 OF nuevoeleme DO FORM adq0704
+ ON SELECTION BAR 8 OF nuevoeleme DO FORM adq0705b
+ ON SELECTION BAR 9 OF nuevoeleme DO FORM adq0706
+ DEFINE POPUP salir SHADOW MARGIN RELATIVE COLOR SCHEME 4
+ DEFINE BAR 1 OF salir PROMPT "Regresar al Menú Princ."
+ DEFINE BAR 2 OF salir PROMPT "Abandonar el siatema"
+ ON SELECTION BAR 1 OF salir DO _2r7033rlj  IN LOCFILE("PROG\MENUADQ" ,"MPX;MPR|FXP;PRG" ,"DÓNDE está MENUADQ?")
+ ON SELECTION BAR 2 OF salir DO _2r7033rlk  IN LOCFILE("PROG\MENUADQ" ,"MPX;MPR|FXP;PRG" ,"DÓNDE está MENUADQ?")
+ READ EVENTS
+ENDPROC
+**
+PROCEDURE _2r7033rlj
+ DO WHILE TYPE('_screen.activeform')='O'
+    _SCREEN.activeform.release
+ ENDDO
+ IF USED('ACCESOS')
+    SELECT accesos
+    USE
+ ENDIF
+ DEACTIVATE MENU _MSYSMENU
+ CLEAR EVENTS
+ CLEAR READ
+ RETURN
+ENDPROC
+**
+PROCEDURE _2r7033rlk
+ DEACTIVATE MENU _MSYSMENU
+ CLEAR EVENTS
+ CLEAR READ
+ final = 1
+ RETURN
+ENDPROC
+**

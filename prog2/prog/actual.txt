@@ -1,0 +1,136 @@
+ALTER TABLE auditoria ADD COLUMN nomdoc varchar(25);
+ALTER TABLE auditoria ADD COLUMN observa varchar(200);
+
+ alter table usuarios add printasic bool DEFAULT false;
+ alter table usuarios add confimp bool DEFAULT true;
+ 
+ alter table imagenrep add proceso bool DEFAULT false;
+ 
+ ALTER TABLE usuarios ADD COLUMN escajero bool DEFAULT 'f';
+
+
+ALTER TABLE auditoria ADD COLUMN campo varchar(100);
+ALTER TABLE auditoria ADD COLUMN valorant varchar(250);
+ALTER TABLE auditoria ADD COLUMN valoract varchar(250);
+
+ALTER TABLE documents ADD COLUMN femiauto date;
+
+ALTER TABLE aneiva ADD COLUMN femiauto date;
+
+--------------------------------------------------------------------------
+ALTER TABLE items ADD COLUMN inactivo bool DEFAULT 'f';
+
+CREATE TRIGGER documents_actualiza
+  AFTER UPDATE
+  ON documents
+  FOR EACH ROW
+  EXECUTE PROCEDURE proceso_audit();
+  
+  
+  ALTER TABLE docuse ADD COLUMN ajucon bool DEFAULT 'f';
+-----------------------------------------------------------------------
+AJUSTES CONTABLES
+
+	ADQ0703B
+	FCONSULTAS -> SECUDOC, CONDOC
+	VIEWS	-> VSECUDOC, VDOCUSMALL, VDOCUMENTS, VDOCUSMAL
+	CONTADOC
+	CLASE GENERAL	-> PRODOCU, DOCSINDET, DOCUMENTO EN CERO, PROPIEDAD AJUCON
+	REGISTRO EN SET0101
+	CON0305 -> TERCERO DE TIPO 6
+	adq0701b ->	ajucon, descuadrado
+-----------------------------------------------------------------------
+ALTER TABLE empleados ADD COLUMN profonres bool DEFAULT 't';
+	
+
+CREATE TABLE otroscre
+(
+   idcredito serial, 
+   tipo int4 NOT NULL, 
+   idsujeto int4 NOT NULL, 
+   scredito float8 DEFAULT 0, 
+   idplancuenta int4, 
+   idempresa int4, 
+   CONSTRAINT pk_creditos PRIMARY KEY (idcredito), 
+   CONSTRAINT fk_sujetos FOREIGN KEY (idsujeto) REFERENCES sujetos (idsujeto)    ON UPDATE CASCADE ON DELETE RESTRICT, 
+   CONSTRAINT fk_empresas FOREIGN KEY (idempresa) REFERENCES sujetos (idsujeto)    ON UPDATE CASCADE ON DELETE RESTRICT
+) WITHOUT OIDS;
+	
+	
+ALTER TABLE otroscre ADD CONSTRAINT ucredito UNIQUE (tipo, idempresa, idsujeto);
+ALTER TABLE otroscre ADD COLUMN diacorte int2;	
+
+----------------------------------------------------------------------
+select serie, tipo, min(numero) as numero from pvta_cab where ttod(fecha)>date(2009,07,31) group by serie, tipo
+
+ALTER TABLE accdoc ADD COLUMN consul bool DEFAULT 'f';
+
+
+CREATE TABLE series
+(
+   idserie serial, 
+   secuencia int4 NOT NULL, 
+   serie varchar(50) NOT NULL, 
+   CONSTRAINT pk_series PRIMARY KEY (idserie), 
+   CONSTRAINT secuencia FOREIGN KEY (secuencia) REFERENCES detadoci (secuencia)    ON UPDATE CASCADE ON DELETE RESTRICT
+) WITHOUT OIDS;
+
+CREATE TABLE idsaldosis
+(
+   idsaldosis serial, 
+   idsaldosi int4 NOT NULL, 
+   serie varchar(50) NOT NULL, 
+   CONSTRAINT pk_saldosis PRIMARY KEY (idsaldosis), 
+   CONSTRAINT fk_idsaldosi FOREIGN KEY (idsaldosi) REFERENCES saldosi (idsaldosi)    ON UPDATE CASCADE ON DELETE RESTRICT
+) WITHOUT OIDS;
+
+****************************************************************
+PRODUCTOS NO VENDIDOS DESDE HACE 1 ANIO
+045 PRODUCTOS NAVIDE;OS, 038 JUGUETES
+
+SELECT CODIGO, NOMBRE FROM ARTICULOS WHERE GRUPO<>'045.' AND GRUPO<>'038.' AND CODIGO NOT IN ;
+(SELECT CODIGO FROM PVTA_MOV D, PVTA_CAB P WHERE D.ID=P.ID AND TTOD(P.FECHA)>=DATE(2008,10,01))
+
+
+select code from documents where montototal<>subconiva+subsiniva-(descuconiva+descusiniva)+ivavalor+recargo
+select code, (subconiva-descuconiva)*0.12, ivavalor from documents where round(((subconiva-descuconiva)*0.12)::numeric,2)<>ivavalor
+
+
+update documents set recargo=round((montototal-subconiva-subsiniva+(descuconiva+descusiniva)-ivavalor)::numeric,2) 
+where round(montototal::numeric,2)<>round((subconiva+subsiniva-(descuconiva+descusiniva)+ivavalor+recargo)::numeric,2) ;
+__________________________________________
+
+ALTER TABLE sujetos ADD COLUMN fec_aper date;
+ALTER TABLE sujetos ADD COLUMN dimen int2 default 1;
+ALTER TABLE sujetos ADD COLUMN isactivo bool DEFAULT 't';
+
+
+CREATE TABLE autprecio
+(
+   idautprecio serial, 
+   idsujeto int4 NOT NULL, 
+   tipo int2 DEFAULT 0, 
+   CONSTRAINT pk_autprecio PRIMARY KEY (idautprecio), 
+   CONSTRAINT fk_sujetos FOREIGN KEY (idsujeto) REFERENCES sujetos (idsujeto)    ON UPDATE CASCADE ON DELETE RESTRICT
+) WITHOUT OIDS;
+
+
+
+
+ALTER TABLE imagenrep ADD COLUMN impresora varchar(150);
+
+
+iif (like('*1*',USUARIO),'AUTOSERVICIO 1', iif(like('*2*',USUARIO),'AUTOSERVICIO 2',  iif(like('*3*',USUARIO),'AUTOSERVICIO 3',  iif(like('*4*',USUARIO),'AUTOSERVICIO 4', iif(like('*5*',USUARIO),'AUTOSERVICIO 5', ALLTRIM(USUARIO)) ))))
+
+
+ALTER TABLE saldosi ADD COLUMN cospro float8 DEFAULT 0;
+ALTER TABLE periodos ADD COLUMN calcosart int2 DEFAULT 1;
+
+
+
+delete from saldosib where idsaldosi in (select idsaldosi from saldosi where iditem in (select iditem from items where icode<>3549 and icode<>3527 and icode<>3534 and icode>=3514 and icode<=3559));
+delete from saldosi where iditem in (select iditem from items where  icode<>3549 and icode<>3527 and icode<>3534 and icode>=3514 and icode<=3559);
+delete from preciosv where iditem in (select iditem from items where  icode<>3549 and icode<>3527 and icode<>3534 and icode>=3514 and icode<=3559);
+delete from items where  icode<>3549 and icode<>3527 and icode<>3534 and icode>=3514 and icode<=3559;
+
+2871

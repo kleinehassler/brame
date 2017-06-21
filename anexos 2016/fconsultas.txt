@@ -1,0 +1,164 @@
+**************************************************************************
+*	homologacion de forma de pago sri
+**************************************************************************
+function forpagsri
+
+para codk
+
+local forpag1k, forpag2k, forpag3k, ncombo
+
+forpag1k=0
+forpag2k=0
+forpag3k=0
+
+q1="select cliente, fecha, forpag1, forpag2, forpag3 "+;
+	"from documents d left join aneiva a on (d.code=a.code)  "+;
+	"where d.code="+alup(codk) 
+if sqli(q1,'anedoc')
+	sele anedoc
+	go top
+	if iif(isnull(forpag1),0,forpag1)+iif(isnull(forpag2),0,forpag2)+iif(isnull(forpag3),0,forpag3)>0
+		return .t.
+	endif
+	
+else
+	return
+endif
+	
+q1="select rubname, valor "+;
+	"from cobros c left join rubros r on (c.rubcode=r.rubcode) "+;
+	"where c.tipo='C' and code="+alup(codk)+";"
+	
+IF !sqli(q1,'tmpcob') then
+	RETURN
+ENDIF
+
+sele tmpcob
+go top
+
+ncombo=1
+do while !eof()
+	do case 
+	case ncombo=1
+		if tmpcob.rubname='CAJA' and valor>0
+			forpag1k=1
+			ncombo=ncombo+1
+		endif
+		if like('CHEQUE*CLI*',tmpcob.rubname) and valor>0
+			if anedoc.fecha<date(2016,06,01)
+				forpag1k=2
+			else	
+				forpag1k=20
+			endif
+			ncombo=ncombo+1
+		endif
+		if like('CUENTA*COBRAR*',tmpcob.rubname) and valor>0
+			q1="select sforpag from sujetos where idsujeto="+alup(anedoc.cliente)
+			if sqli(q1,'fpcli')
+				if fpcli.sforpag>0
+					forpag1k=fpcli.sforpag
+				else
+					forpag1k=1
+				endif
+				ncombo=ncombo+1	
+			endif
+		endif
+		if like('DINERO*E*',tmpcob.rubname) and valor>0
+			forpag1k=17
+			ncombo=ncombo+1
+		endif
+		if (like('TARJETA*',tmpcob.rubname) or like('T/C*',tmpcob.rubname)) and valor>0
+			if anedoc.fecha<date(2016,06,01)
+				forpag1k=10
+			else	
+				forpag1k=19
+			endif	
+			ncombo=ncombo+1
+		endif
+	case ncombo=2
+		if tmpcob.rubname='CAJA' and valor>0
+			forpag2k=1
+			ncombo=ncombo+1
+		endif
+		if like('CHEQUE*CLI*',tmpcob.rubname) and valor>0
+			if anedoc.fecha<date(2016,06,01)
+				forpag2k=2
+			else	
+				forpag2k=20
+			endif
+			ncombo=ncombo+1
+		endif
+		if like('CUENTA*COBRAR*',tmpcob.rubname) and valor>0
+			q1="select sforpag from sujetos where idsujeto="+alup(anedoc.cliente)
+			if sqli(q1,'fpcli')
+				if fpcli.sforpag>0
+					forpag2k=fpcli.sforpag
+				else
+					forpag2k=1
+				endif	
+			endif
+			ncombo=ncombo+1
+		endif
+		if like('DINERO*E*',tmpcob.rubname) and valor>0
+			forpag2k=17
+			ncombo=ncombo+1
+		endif
+		if (like('TARJETA*',tmpcob.rubname) or like('T/C*',tmpcob.rubname)) and valor>0
+			if anedoc.fecha<date(2016,06,01)
+				forpag2k=10
+			else	
+				forpag2k=19
+			endif	
+			ncombo=ncombo+1
+		endif
+	case ncombo=3
+		if tmpcob.rubname='CAJA' and valor>0
+			forpag3k=1
+			ncombo=ncombo+1
+		endif
+		if like('CHEQUE*CLI*',tmpcob.rubname) and valor>0
+			if anedoc.fecha<date(2016,06,01)
+				forpag3k=2
+			else	
+				forpag3k=20
+			endif
+			ncombo=ncombo+1
+		endif
+		if like('CUENTA*COBRAR*',tmpcob.rubname) and valor>0
+			q1="select sforpag from sujetos where idsujeto="+alup(anedoc.cliente)
+			if sqli(q1,'fpcli')
+				if fpcli.sforpag>0
+					forpag3k=fpcli.sforpag
+				else
+					forpag3k=1
+				endif	
+			endif
+			ncombo=ncombo+1
+		endif
+		if like('DINERO*E*',tmpcob.rubname) and valor>0
+			forpag3k=17
+			ncombo=ncombo+1
+		endif
+		if (like('TARJETA*',tmpcob.rubname) or like('T/C*',tmpcob.rubname)) and valor>0
+			if anedoc.fecha<date(2016,06,01)
+				forpag3k=10
+			else	
+				forpag3k=19
+			endif	
+			ncombo=ncombo+1
+		endif
+	endcase
+	
+	sele tmpcob
+	skip
+enddo
+
+if forpag1k+forpag2k+forpag1k=0
+	forpag1k=1
+endif
+
+q1="update aneiva set  forpag1="+alup(forpag1k)+;
+					", forpag2="+alup(forpag2k)+;
+					", forpag3="+alup(forpag3k)+;
+				" where code="+alup(codk)
+return sqli(q1)

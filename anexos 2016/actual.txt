@@ -1,0 +1,24 @@
+update sritabla set descrip=rtrim(descrip,' ')||' hasta 31-Ago-2016' 
+where  valor<>1 and iddato=5555;
+
+INSERT INTO sritabla (codigo, descrip, anio, mes, iddato, valor) VALUES (15, 'COMPENSACIÓN DE DEUDAS', 0, 0, 5555, 15);
+INSERT INTO sritabla (codigo, descrip, anio, mes, iddato, valor) VALUES (16, 'TARJETA DE DÉBITO', 0, 0, 5555, 16);
+INSERT INTO sritabla (codigo, descrip, anio, mes, iddato, valor) VALUES (17, 'DINERO ELECTRÓNICO', 0, 0, 5555, 17);
+INSERT INTO sritabla (codigo, descrip, anio, mes, iddato, valor) VALUES (18, 'TARJETA PREPAGO', 0, 0, 5555, 18);
+INSERT INTO sritabla (codigo, descrip, anio, mes, iddato, valor) VALUES (19, 'TARJETA DE CRÉDITO', 0, 0, 5555, 19);
+INSERT INTO sritabla (codigo, descrip, anio, mes, iddato, valor) VALUES (20, 'OTROS CON UTILIZACION DEL SISTEMA FINANCIERO', 0, 0, 5555, 20);
+INSERT INTO sritabla (codigo, descrip, anio, mes, iddato, valor) VALUES (21, 'ENDOSO DE TÍTULOS', 0, 0, 5555, 21);
+
+ALTER TABLE sujetos
+  ADD COLUMN sforpag integer DEFAULT 0;
+
+CREATE TABLE estbcmntos
+(
+   idestbcmnto serial, 
+   estb smallint DEFAULT 0, 
+   descrip character varying(120)
+) 
+WITH (
+  OIDS = FALSE
+)
+;

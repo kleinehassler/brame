@@ -1,0 +1,1 @@
+DSN=LOCALSERVER;Description=LOCALSERVER;APP=Microsoft® Visual FoxPro®;WSID=ROSITA;DATABASE=FRIGOCENTRO;LANGUAGE=Español;Network=DBNMPNTW;Trusted_Connection=Yes

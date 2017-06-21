@@ -1,0 +1,18 @@
+
+begin;
+update preciosv set preciov=preciov/1.14 from items where preciosv.iditem=items.iditem and items.isiva= 'true'
+
+update preciosv set preciov=preciov*1.12 from items where preciosv.iditem=items.iditem and items.isiva= 'true'
+
+commit;
+
+select ITEMS.iname, preciosv.PRECIOV, preciosv.preciov*1.02, ITEMS.IDITEM from preciosv, items where preciosv.iditem=items.iditem and items.isiva= 'true'
+select * from preciosv, items where preciosv.iditem=items.iditem and items.isiva= 'true'
+
+
+begin;
+update preciosv set preciov=round((preciov/1.14)::numeric,6) from items where preciosv.iditem=items.iditem and items.isiva= 'true';
+
+update preciosv set preciov=round((preciov*1.12)::numeric,6) from items where preciosv.iditem=items.iditem and items.isiva= 'true';
+
+commit;

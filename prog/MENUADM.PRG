@@ -1,0 +1,112 @@
+ SET SYSMENU TO
+ SET SYSMENU AUTOMATIC
+ DEFINE PAD _2ua0hq2za OF _MSYSMENU PROMPT "Contable" KEY ALT+C, "" COLOR SCHEME 3
+ DEFINE PAD _2ua0hq2zq OF _MSYSMENU PROMPT "Finanzas" KEY ALT+F, "" COLOR SCHEME 3
+ DEFINE PAD _2ua0hq2zr OF _MSYSMENU PROMPT "Datos Generales" KEY ALT+D, "" COLOR SCHEME 3
+ DEFINE PAD _2ua0hq2zs OF _MSYSMENU PROMPT "Reportes" KEY ALT+R, "" COLOR SCHEME 3
+ DEFINE PAD _2ua0hq2zt OF _MSYSMENU PROMPT "Documentos" KEY ALT+D, "" COLOR SCHEME 3
+ DEFINE PAD _2ua0hq2zu OF _MSYSMENU PROMPT "Salir" KEY ALT+S, "" COLOR SCHEME 3
+ ON PAD _2ua0hq2za OF _MSYSMENU ACTIVATE POPUP contable
+ ON PAD _2ua0hq2zq OF _MSYSMENU ACTIVATE POPUP finanzas
+ ON PAD _2ua0hq2zr OF _MSYSMENU ACTIVATE POPUP datosgener
+ ON PAD _2ua0hq2zs OF _MSYSMENU ACTIVATE POPUP _2aq15zs3d
+ ON PAD _2ua0hq2zt OF _MSYSMENU ACTIVATE POPUP documentos
+ ON PAD _2ua0hq2zu OF _MSYSMENU ACTIVATE POPUP salir
+ DEFINE POPUP contable SHADOW MARGIN RELATIVE COLOR SCHEME 4
+ DEFINE BAR 1 OF contable PROMPT "Rubros"
+ DEFINE BAR 2 OF contable PROMPT "\-"
+ DEFINE BAR 3 OF contable PROMPT "Definición Documentos"
+ DEFINE BAR 4 OF contable PROMPT "Grupo de documentos"
+ DEFINE BAR 5 OF contable PROMPT "Tipos de Reportes"
+ DEFINE BAR 6 OF contable PROMPT "\-"
+ DEFINE BAR 7 OF contable PROMPT "Contabilizacion de Roles"
+ DEFINE BAR 8 OF contable PROMPT "Contabilizacion de Items"
+ DEFINE BAR 9 OF contable PROMPT "\-"
+ DEFINE BAR 10 OF contable PROMPT "Plan de Cuentas"
+ DEFINE BAR 11 OF contable PROMPT "Consulta"
+ DEFINE BAR 12 OF contable PROMPT "\-"
+ DEFINE BAR 13 OF contable PROMPT "Importar Confg. Documentos."
+ ON SELECTION BAR 1 OF contable DO FORM adm0101
+ ON SELECTION BAR 3 OF contable DO FORM adm0102b
+ ON SELECTION BAR 4 OF contable DO FORM adm0105
+ ON SELECTION BAR 5 OF contable DO FORM adm0104b
+ ON SELECTION BAR 7 OF contable DO FORM rol0102
+ ON SELECTION BAR 8 OF contable DO FORM contitem
+ ON SELECTION BAR 10 OF contable DO FORM con0201
+ ON SELECTION BAR 11 OF contable DO FORM adm0106
+ ON SELECTION BAR 13 OF contable DO FORM adm0107
+ DEFINE POPUP finanzas SHADOW MARGIN RELATIVE COLOR SCHEME 4
+ DEFINE BAR 1 OF finanzas PROMPT "Monedas"
+ DEFINE BAR 2 OF finanzas PROMPT "Bloqueos Cuentas Grupos"
+ DEFINE BAR 3 OF finanzas PROMPT "Administracion de Bloqueos"
+ ON SELECTION BAR 1 OF finanzas DO FORM adm0202
+ ON SELECTION BAR 2 OF finanzas DO FORM adm0203
+ ON SELECTION BAR 3 OF finanzas DO FORM adm0203a
+ DEFINE POPUP datosgener SHADOW MARGIN RELATIVE COLOR SCHEME 4
+ DEFINE BAR 1 OF datosgener PROMPT "Agrupación de Datos"
+ DEFINE BAR 2 OF datosgener PROMPT "Talas de Datos"
+ DEFINE BAR 3 OF datosgener PROMPT "\-"
+ DEFINE BAR 4 OF datosgener PROMPT "Autorizaciones del SRI"
+ DEFINE BAR 5 OF datosgener PROMPT "Secuencias"
+ DEFINE BAR 6 OF datosgener PROMPT "\-"
+ DEFINE BAR 7 OF datosgener PROMPT "Sujetos"
+ DEFINE BAR 8 OF datosgener PROMPT "Unificar Sujetos Individual"
+ DEFINE BAR 9 OF datosgener PROMPT "Unificacion General"
+ ON SELECTION BAR 1 OF datosgener DO FORM adm0301
+ ON SELECTION BAR 2 OF datosgener DO FORM adm0302a
+ ON SELECTION BAR 4 OF datosgener DO FORM autosri
+ ON SELECTION BAR 5 OF datosgener DO FORM set0303
+ ON SELECTION BAR 7 OF datosgener DO FORM adm0303
+ ON SELECTION BAR 8 OF datosgener DO FORM cambiasuj
+ ON SELECTION BAR 9 OF datosgener DO FORM cambiasuj1
+ DEFINE POPUP _2aq15zs3d SHADOW MARGIN RELATIVE COLOR SCHEME 4
+ DEFINE BAR 1 OF _2aq15zs3d PROMPT "Contabilizacion"
+ DEFINE BAR 2 OF _2aq15zs3d PROMPT "Liquidaciones"
+ ON SELECTION BAR 1 OF _2aq15zs3d DO FORM impcondoc
+ ON SELECTION BAR 2 OF _2aq15zs3d DO FORM impliq
+ DEFINE POPUP documentos SHADOW MARGIN RELATIVE COLOR SCHEME 4
+ DEFINE BAR 1 OF documentos PROMPT "Formas de Pago/Cobro"
+ DEFINE BAR 2 OF documentos PROMPT "Doc. Bancario"
+ DEFINE BAR 3 OF documentos PROMPT "Contabilizacion"
+ DEFINE BAR 4 OF documentos PROMPT "Correccion"
+ DEFINE BAR 5 OF documentos PROMPT "Correccion de Items"
+ DEFINE BAR 6 OF documentos PROMPT "Anulacion"
+ DEFINE BAR 7 OF documentos PROMPT "\-"
+ DEFINE BAR 8 OF documentos PROMPT "Consulta"
+ ON SELECTION BAR 1 OF documentos DO FORM adq0701b
+ ON SELECTION BAR 2 OF documentos DO FORM adq0702b
+ ON SELECTION BAR 3 OF documentos DO FORM adq0703b
+ ON SELECTION BAR 4 OF documentos DO FORM adq0706
+ ON SELECTION BAR 5 OF documentos DO FORM moditems
+ ON SELECTION BAR 6 OF documentos DO FORM adq0704
+ ON SELECTION BAR 8 OF documentos DO FORM adq0705b
+ DEFINE POPUP salir SHADOW MARGIN RELATIVE COLOR SCHEME 4
+ DEFINE BAR 1 OF salir PROMPT "Regresar al Menu Princ."
+ DEFINE BAR 2 OF salir PROMPT "Abandonar el Sistema"
+ ON SELECTION BAR 1 OF salir DO _2ua0hq2zv  IN LOCFILE("PROG\MENUADM" ,"MPX;MPR|FXP;PRG" ,"DÓNDE está MENUADM?")
+ ON SELECTION BAR 2 OF salir DO _2ua0hq2zw  IN LOCFILE("PROG\MENUADM" ,"MPX;MPR|FXP;PRG" ,"DÓNDE está MENUADM?")
+ READ EVENTS
+ENDPROC
+**
+PROCEDURE _2ua0hq2zv
+ DO WHILE TYPE('_screen.activeform')='O'
+    _SCREEN.activeform.release
+ ENDDO
+ IF USED('ACCESOS')
+    SELECT accesos
+    USE
+ ENDIF
+ DEACTIVATE MENU _MSYSMENU
+ CLEAR EVENTS
+ CLEAR READ
+ RETURN
+ENDPROC
+**
+PROCEDURE _2ua0hq2zw
+ DEACTIVATE MENU _MSYSMENU
+ CLEAR EVENTS
+ CLEAR READ
+ final = 1
+ RETURN
+ENDPROC
+**
